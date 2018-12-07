@@ -25,7 +25,22 @@
 <P> This is a new paragraph!
 
 <H2> <B>Problem Statement:</B>
-<P> 
+<P> We carried out our analysis on the million song subset consisting of 10000 songs from the source website since
+the full dataset was too large for our computer’s memory. We used the file hdf5_getters.py to access the fields in
+HDF5 song files provided in the dataset, and extracted the following attributes for each song to a csv file:
+title
+artist_name
+song_hotttnesss - about half of the songs were missing hotness values
+artist_hotness
+danceability - all values were 0 i.e not analyzed
+energy - all values were 0 i.e not analyzed
+duration
+loudness
+key
+tempo
+artist_num_tags - number of unique tags the artist received on musicbrainz.org
+year
+</P>
 
 <BR> <B><I>This is a new sentence without a paragraph break, in bold italics.</I></B>
 
