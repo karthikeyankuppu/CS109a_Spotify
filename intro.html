@@ -18,21 +18,30 @@
 
 <H2> Motivation: </H2> 
  <p>
-<div style="width:800px; height:400px;">
- <img src="https://raw.githubusercontent.com/karthikeyankuppu/CS109a_Spotify/master/Capture.PNG" class="center" style="max-width:200px; height:100px; transform:scale(4); transform-origin:left top;" />
- </div>
   </p>
+<p><span style="font-weight: 400;">The motivation of this project is to apply our data science knowledge to design and implement a music recommender. We wanted to demystify the music recommendation process and develop a method that predicted user taste at a high level of accuracy based on a given song or playlist. The process we envision employs collaborative filtering at two different levels, i.e. a user-based method (playlist-level analysis) and a item-based method (song-level analysis). Additionally, we determined early on that in order to develop a robust recommendation system, it may make the most sense to utilize both supervised and unsupervised approaches. Along the way, we plan to identify important variables and challenge our assumptions about what variables make songs a suitable suggestion for a playlist. </span><br /><br /></p>
+<p><strong>Exploratory Data Analysis (EDA)</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Our exploratory data analysis is aimed to extract insights about the our sample of playlists. Our aim was to understand the structure of playlists, how songs and tastes have changed over time and how song characteristics are related to each other.</span></p>
+<p><span style="font-weight: 400;">The box-plot below shows that the median number of tracks was 50, while the number of albums per playlist stood at a median value of 37. At this point, we thought that it might make the most sense to use median values for song characteristics in playlists, given the wide number of tracks within a playlist, a mean value for a given song characteristics (for example &ldquo;Loudness&rdquo;), might skew the values for that playlist.</span></p>
+<p>&nbsp;</p>
+<p><strong>Box-plot of Number of Tracks and Number of Albums per Playlist</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">We also examined the distribution of songs, within playlists, across the years that the songs were released. In the graph below we see that the number of songs in the sample is heavily skewed to more recent years, especially within the last two decades. 2015 is the year with highest number of songs. </span></p>
+<p>&nbsp;</p>
+<p><strong>Bar Chart showing the Number of Unique Tracks by Release Year</strong></p>
+<p><br /><br /></p>
+<p><strong>Changing Tastes Over Time for Acousticness, Valence and Loudness</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Rather than just analyzing the number of songs per year. We thought it was pertinent to view trends over time for interesting variables (using median values at the playlist level). The line graph above shows median </span><strong>playlist </strong><span style="font-weight: 400;">values for &ldquo;Accousticness&rdquo;, &ldquo;Valence&rdquo; and &ldquo;Loudness&rdquo; changing since 1980. We see that &ldquo;Accousticness&rdquo; is relatively flat, however, peaked in the late 80s, early 90s and decreasing slightly since then. &ldquo;Valence&rdquo; a measure of how cheerful or happy a song is, seems to be decreasing since the 1980s. &ldquo;Loudness&rdquo;, on the other hand, interestingly has been steadily increasing over time. These trends confirm that musical tastes and technology (more electronic instrumental) have changed over the last few decades.</span></p>
+<p><br /><br /></p>
+<p><strong>Scatterplot Matrix</strong></p>
+<p>&nbsp;</p>
+<p><strong>Correlation Matrix</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">We analyzed a scatterplot matrix of the variables of interest in addition to popularity. The graph of the data demonstrate patterns that seem to make sense intuitively. For instance, &ldquo;Loudness&rdquo; and &ldquo;Energy&rdquo; are highly positively correlated and a scatterplot analysis of the two produces an R squared of 0.67. On the other hand, &ldquo;Accousticness&rdquo;, which is a measure of whether a song has electrical amplification (0 is low acousticness, 1 is high), displays a negative relationship with both &ldquo;Energy&rdquo; and &ldquo;Loudness&rdquo;. &ldquo;Valence&rdquo;, a measure of how cheerful or happy a track is was found to be positively correlated with &ldquo;Danceability&rdquo;. Nevertheless, the matrix shows some surprises, for instance, &ldquo;Popularity&rdquo; is most closely related to &nbsp;&ldquo;Danceability&rdquo; (R squared of 0.1), indicating that more lively songs rather than slow and sentimental, were important for track popularity. The results of the correlation and scatterplot analysis inform the variable selection process as we can observe instances of multicollinearity, for example, &ldquo;Loudness&rdquo; and &ldquo;Energy&rdquo; exhibit a very high correlation (0.84). We the decided it was best to eliminate one of these variables.</span></p>
+<p><span style="font-weight: 400;">As the final step in our EDA analysis, we plotted the distribution playlist means for song characteristics. We noticed that &ldquo;Tempo&rdquo; was highly centered around 0.5 and "acousticness" was skewed to 0.1.</span></p>
 
-<H2> Problem Statement: </H2> 
-  
-<br>How can a playlist be generated for a user based on an example playlist provided by the user?
-<br>a. What is the minimum length of the example playlist that the model needs to create a playlist
-recommender system?
-<br> can unsupervised learning and supervised learning be combined in an example playlist scenario?
-<br>a. How can different datasets be joined to make a superset that includes features from NLP,
-million song and million playlist data sets?
-<br>b. What algorithms can be used to tackle unsupervised and supervised learning of song clusters?
-  
   <blockquote style="background-color: #ccc;"> 
   <xmp>
    ...code...
