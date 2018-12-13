@@ -68,10 +68,51 @@
 <p>&nbsp;</p>
 <p><strong>Unsupervised Learning:</strong></p>
 <p><span style="font-weight: 400;">First, taste clusters were developed using the k-means unsupervised learning method. Using the elbow graph, 17 clusters were chosen as the optimum number that accounted for the variation in the data. These clusters are used in further sections as dependent variables (categorical).</span></p>
-<p>&nbsp;</p>
+
+  <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/elbow.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+  
+  <p>&nbsp;</p>
 <p><strong>Feature Selection:</strong></p>
 <p><span style="font-weight: 400;">We employed several methods for feature selection. Firstly, the EDA we conducted at the beginning of the analysis informs the feature selection process. For instance, in the correlation analysis we notice that acousticness was highly negatively correlated with &ldquo;Loudness&rdquo; and &ldquo;Energy&rdquo;. Hence, we decided it would not make sense to include this variable in the supervised model. Secondly, we graphed the mean audio features for all the playlists as histograms and noticed that &ldquo;Speechinnes&rdquo; and &ldquo;Instrumentalness&rdquo; was heavily skewed and the distribution of the values did not seem useful for prediction.</span></p>
 <p><span style="font-weight: 400;">Lastly, we also conducted a random forest test with attempting to predict which taste cluster a song falls into and graphed the variable importance and found that median year was not a major predictor. At this stage, we decided to drop median year which surprisingly turned out to have little predictive power. We then included all the variables that were above 0.2 in the variable importance and decided to move forward with 7 variables: median &ldquo;danceability&rdquo;, median &ldquo;energy&rdquo;, median &ldquo;speechinness&rdquo;, median &ldquo;valence&rdquo;, median &ldquo;tempo&rdquo;, median &ldquo;acousticness&rdquo;, std dev &ldquo;speechinness&rdquo;.</span><br /><br /></p>
+  
+    <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/explained%20variance.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+  
+      <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/pca.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+  
+    <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/kmeanspca.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+
+  <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/kmodespca.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+  
+ <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/rf%20importance.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+  
+  
+  
+  
 <p><strong>Supervised Learning:</strong></p>
 <p><span style="font-weight: 400;">Supervised learning models were explored with a baseline of the K-NN method. The following were the cross-validation scores on the training sets by supervised learning models:</span></p>
 <ul>
@@ -79,6 +120,22 @@
 <li style="font-weight: 400;"><span style="font-weight: 400;">Decision trees: 0.78</span></li>
 <li style="font-weight: 400;"><span style="font-weight: 400;">Random forest: 0.89</span></li>
 </ul>
+
+ <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/decision.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+
+ <p>
+<div style="width:800px; height:250px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/knn.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+ </div>
+  </p> 
+
+
+
+
 <p><strong>Recommender System:</strong></p>
 <p><span style="font-weight: 400;">Given a playlist from the playlist data frame, we recommend songs to that playlist in the following way:</span></p>
 <ol>
