@@ -93,8 +93,8 @@
 <p><span style="font-weight: 400;">Lastly, we also conducted a random forest test with attempting to predict which taste cluster a song falls into and graphed the variable importance and found that median year was not a major predictor. At this stage, we decided to drop median year which surprisingly turned out to have little predictive power. We then included all the variables that were above 0.2 in the variable importance and decided to move forward with 7 variables: median &ldquo;danceability&rdquo;, median &ldquo;energy&rdquo;, median &ldquo;speechinness&rdquo;, median &ldquo;valence&rdquo;, median &ldquo;tempo&rdquo;, median &ldquo;acousticness&rdquo;, std dev &ldquo;speechinness&rdquo;.</span><br /><br /></p>
   
     <p>
-<div style="width:800px; height:250px;">
- <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/explained%20variance.png?raw=true" class="center" style="max-width:150px; height:30px; transform:scale(4); transform-origin:left top;" />
+<div style="width:800px; height:400px;">
+ <img src="https://github.com/karthikeyankuppu/CS109a_Spotify/blob/master/explained%20variance.png?raw=true" class="center" style="max-width:200px; height:100px; transform:scale(4); transform-origin:left top;" />
  </div>
   </p> 
   
@@ -157,7 +157,9 @@
 </ol>
 <p><span style="font-weight: 400;">We didn&rsquo;t really evaluate the accuracy of our recommender system but by including only the audio features that best characterize playlists, we ensured that the recommender system at least tries to recommend tracks which match the given playlist on the important features. </span></p>
 <p>&nbsp;</p>
-  
+ 
+<p><strong>Future Work</strong></p>
+<p><span style="font-weight: 400;">Moving forward, it would be pertinent to include data on genres, song language and maybe even attributes about artists. If we had further attributed on artists, we could perform cluster analysis on the artist data and generate an &ldquo;artist typology&rdquo;. We were unable to carry out this analysis since acquiring this data would require thorough and extensive scraping from websites and we could not complete it in the given time. Additionally, we thought that NLP analysis on lyrics may allow us to parse out richer insight on songs from their lyrics; this presents an area for future research.</span></p>
   
   </HTML>
 
