@@ -1,1 +1,95 @@
+<HTML style="margin-top:2%;margin-left:22%; margin-right:22%;padding:0">
+
+<HEAD>
+
+  <TITLE>Playlist Recommender</TITLE>
+
+<H1>Playlist Recommender</H1>
+<H2>CS.109a: Data Science I Final Project</H2>
+<P> Kadeem Khan, Sapna Kumari, Karthikeyan Kuppu
+</HEAD>
+
+<HR>
+
+<a href="https://karthikeyankuppu.github.io/CS109a_Spotify/index.html">Playlist Recommender</a>  |
+<a href="https://karthikeyankuppu.github.io/CS109a_Spotify/intro.html">Introduction and EDA</a>  |
+<a href="https://karthikeyankuppu.github.io/CS109a_Spotify/model.html">Models</a>  |
+<a href="https://karthikeyankuppu.github.io/CS109a_Spotify/result.html">Results and Conclusion</a> 
+
+<H2> Methodology and Models </H2> 
+ 
+<p><strong>Overview of the Steps:</strong></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">10,000 playlists were chosen for analysis from the million playlist set</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Descriptive statistics were calculated for each playlist</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Unsupervised Learning techniques were used to place playlists into taste cluster</span></li>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">K-means</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">K-modes</span></li>
+</ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Dimension reduction</span></li>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Principal Component Analysis</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Random Forest Variable Importance</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Correlation charts</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Distribution of features across playlists and within playlists</span></li>
+</ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Supervised Learning</span></li>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">K-NN (baseline model)</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Random forest</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Decision trees</span></li>
+</ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Playlist recommender</span></li>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Tookan initial list of songs from the user</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Calculated the factors listed above </span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Placed the playlist in one of the k-means clusters by randomforest or knn methods</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Found the nearest songs in that cluster from k-means</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Weighted the songs according to song position in playlist or by the euclidean distance</span></li>
+</ol>
+</ol>
+<p>&nbsp;</p>
+<p><strong>Data Collection, Cleaning and Aggregation:</strong></p>
+<p><span style="font-weight: 400;">Data for the project was collected from the million playlist dataset provided by Spotify Labs as a part of the RecSys Challenge 2018. The first 10,000 playlists in the dataset was extracted from the .json files and parsed to a panda dataframe. </span></p>
+<p><span style="font-weight: 400;">In the process of parsing, characteristics of tracks in the playlist such as danceability, loudness, speechiness etc. were aggregated to give mean, medians and average standard deviations of the playlist. Aggregating the characteristics gave a chance to characterise each playlist uniquely and provide a user taste profile. In addition to the track characteristics, the data frame contained number of followers, number of tracks and number of albums. Finally, the data frame was cleaned to remove outliers and extreme/ infinite values. </span></p>
+<p><span style="font-weight: 400;">The cleaned data frame contained 664,641 (170,073 unique) songs within 10,000 playlists.</span></p>
+<p>&nbsp;</p>
+<p><strong>Literature Review:</strong></p>
+<p><span style="font-weight: 400;">Typically, when dealing with recommendation, companies like Netflix, Spotify etc. use collaborative filtering. The method is an automatic recommender that suggests lists of songs for a particular user by gaining information on taste from other users of similar characteristics. </span></p>
+<p><span style="font-weight: 400;">Collaborative filtering may be user based or item based. The combination of the two types - user-item based - provides a framework to leverage both human characteristics as well as song characteristics. </span></p>
+<p><span style="font-weight: 400;">The user based framework commonly deals with two steps:</span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Find users who show similar patterns of song selection (likes and dislikes)</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Uses weights for similar songs to suggest a list of songs in order of highly likely to least likely</span></li>
+</ul>
+<p><span style="font-weight: 400;">The item based framework commonly finds relationships between items - which in this case is songs - in the format of a matrix and finds the relationships between all pairs of items. </span></p>
+<p><span style="font-weight: 400;">The approach used in this project is a combination of user-based and item-based collaborative filtering. First, taste clusters are developed with k-means clustering. Then the closest playlists to the sample asked from the users is determined. Second, tracks in each neighboring playlist is compared pairwise with the sample playlist and ordered according to similarity. The resulting lists of tracks are then ordered and suggested to the user. </span></p>
+<p>&nbsp;</p>
+<p><strong>Unsupervised Learning:</strong></p>
+<p><span style="font-weight: 400;">First, taste clusters were developed using the k-means unsupervised learning method. Using the elbow graph, 17 clusters were chosen as the optimum number that accounted for the variation in the data. These clusters are used in further sections as dependent variables (categorical).</span></p>
+<p>&nbsp;</p>
+<p><strong>Feature Selection:</strong></p>
+<p><span style="font-weight: 400;">We employed several methods for feature selection. Firstly, the EDA we conducted at the beginning of the analysis informs the feature selection process. For instance, in the correlation analysis we notice that acousticness was highly negatively correlated with &ldquo;Loudness&rdquo; and &ldquo;Energy&rdquo;. Hence, we decided it would not make sense to include this variable in the supervised model. Secondly, we graphed the mean audio features for all the playlists as histograms and noticed that &ldquo;Speechinnes&rdquo; and &ldquo;Instrumentalness&rdquo; was heavily skewed and the distribution of the values did not seem useful for prediction.</span></p>
+<p><span style="font-weight: 400;">Lastly, we also conducted a random forest test with attempting to predict which taste cluster a song falls into and graphed the variable importance and found that median year was not a major predictor. At this stage, we decided to drop median year which surprisingly turned out to have little predictive power. We then included all the variables that were above 0.2 in the variable importance and decided to move forward with 7 variables: median &ldquo;danceability&rdquo;, median &ldquo;energy&rdquo;, median &ldquo;speechinness&rdquo;, median &ldquo;valence&rdquo;, median &ldquo;tempo&rdquo;, median &ldquo;acousticness&rdquo;, std dev &ldquo;speechinness&rdquo;.</span><br /><br /></p>
+<p><strong>Supervised Learning:</strong></p>
+<p><span style="font-weight: 400;">Supervised learning models were explored with a baseline of the K-NN method. The following were the cross-validation scores on the training sets by supervised learning models:</span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">K-nearest neighbors (baseline model): &nbsp;0.90</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Decision trees: 0.78</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Random forest: 0.89</span></li>
+</ul>
+<p><strong>Recommender System:</strong></p>
+<p><span style="font-weight: 400;">Given a playlist from the playlist data frame, we recommend songs to that playlist in the following way:</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">We find the top 10 closest playlists to the given playlist generated by the clustering model outlined above</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;"> We find all the tracks in &nbsp;those 10 closest playlists and compute the euclidean distance of each track with the given playlist on the relevant features returned by our models and sort the tracks</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">We return top 100 closest tracks to the given playlist</span></li>
+</ol>
+<p><span style="font-weight: 400;">We didn&rsquo;t really evaluate the accuracy of our recommender system but by including only the audio features that best characterize playlists, we ensured that the recommender system at least tries to recommend tracks which match the given playlist on the important features. </span></p>
+<p>&nbsp;</p>
+  
+  
+  </HTML>
+
 
